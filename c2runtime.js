@@ -13211,6 +13211,7 @@ contact.phoneNumbers = phoneNumbers;
 contact.emails = emails;
 contact.urls = website;
 contact.photos=photos;
+	    alert('test');
 contact.save(onSuccess,onError);
 };
 Acts.prototype.PickContact = function (filterValue)
