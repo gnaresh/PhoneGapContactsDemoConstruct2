@@ -13257,7 +13257,7 @@ if (!(this.runtime.isAndroid || this.runtime.isBlackberry10 || this.runtime.isiO
 		this.contactsCount=contacts.length; // num of contacts returned
 		this.allContacts=contacts; // contacts as array
     alert('Found ' + this.contactsCount + ' contacts.');
-	alert('First Contact: '+contacts[0].toString());
+	alert('First Contact: '+contacts[0]);
 	this.contactsList="["+contacts[0].displayName+","+contacts[0].phoneNumbers[0].value+"]";
 	for (var i = 0; i < contacts.length; i++) {
 	var numbers=contacts[i].phoneNumbers[0].value;
