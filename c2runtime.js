@@ -13194,24 +13194,33 @@ function onSuccess(contact) {
     alert(""+contact.name.givenName+" saved.");
 };
 var contact = navigator.contacts.create();          // specify both to support all devices
+if(displayName!=""){
 contact.displayName = displayName;
 contact.nickname = displayName;
 var name = new ContactName();
 name.givenName = displayName;
 contact.name = name;
+}
+if(mobile!=""){
 var phoneNumbers = [];
     phoneNumbers[0] = new ContactField('mobile', mobile, true); // preferred number
+contact.phoneNumbers = phoneNumbers;
+	}
+if(email!=""){
 var emails =[];
     emails[0] = new ContactField('emails', email);
+	contact.emails = emails;
+    }
+if(weburl!=""){
 var website=[];
 	website[0] = new ContactField('website', weburl);
+	contact.urls = website;
+	}
+if(picurl!=""){
 var photos=[];
 	photos[0]= new ContactField('photos', picurl);
-contact.phoneNumbers = phoneNumbers;
-contact.emails = emails;
-contact.urls = website;
-contact.photos=photos;
-	    alert('test');
+	contact.photos=photos;
+	}
 contact.save(onSuccess,onError);
 };
 Acts.prototype.PickContact = function (filterValue)
@@ -13221,21 +13230,21 @@ if (!(this.runtime.isAndroid || this.runtime.isBlackberry10 || this.runtime.isiO
 		if (this.runtime.isAndroid && navigator.platform == 'Win32')//crosswalk emulator
 			return;
 		var self=this;
-		function onSuccess(contacts) {
+		function onSuccess1(contacts) {
 		this.singleContact=contacts[0];
 		var nameof=contacts[0].displayName;
 		var number=contacts[0].phoneNumbers[0].value;
     alert('' + nameof + ': '+ number);
 		this.gotContact=true;
 };
-function onError(contactError) {
+function onError1(contactError) {
     alert('onError!');
 };
 var options      = new ContactFindOptions();
 options.filter   = filterValue;
-options.multiple = true;
-var fields       = ["displayName", "phoneNumbers"];
-navigator.contacts.find(fields, onSuccess, onError, options);
+options.multiple = false;
+var fields       = ["displayName", "name" ,"phoneNumbers"];
+navigator.contacts.find(fields, onSuccess1, onError1, options);
 };
 Acts.prototype.PickAllContacts = function ()
 	{
@@ -13244,7 +13253,7 @@ if (!(this.runtime.isAndroid || this.runtime.isBlackberry10 || this.runtime.isiO
 		if (this.runtime.isAndroid && navigator.platform == 'Win32')//crosswalk emulator
 			return;
 		var self=this;
-		function onSuccess(contacts) {
+		function onSuccess2(contacts) {
 		this.contactsCount=contacts.length; // num of contacts returned
 		this.allContacts=contacts; // contacts as array
     alert('Found ' + this.contactsCount + ' contacts.');
@@ -13258,14 +13267,14 @@ if (!(this.runtime.isAndroid || this.runtime.isBlackberry10 || this.runtime.isiO
         }
 		this.gotAllContacts=true;
 };
-function onError(contactError) {
+function onError2(contactError) {
     alert('onError!');
 };
 var options      = new ContactFindOptions();
 options.filter   = "*";
 options.multiple = true;
-var fields       = ["displayName", "phoneNumbers"];
-navigator.contacts.find(fields, onSuccess, onError, options);
+var fields       = ["displayName", "name" ,"phoneNumbers"];
+navigator.contacts.find(fields, onSuccess2, onError2, options);
 };
 	pluginProto.acts = new Acts();
 	function Exps() {};
@@ -14858,7 +14867,7 @@ cr.getProjectModel = function() { return [
 				]
 			]
 ,			[
-				[12, 159, 0, 454, 466, 0, 0, 1, 0, 0, 0, 0, []],
+				[12, 159, 0, 454, 442, 0, 0, 1, 0, 0, 0, 0, []],
 				10,
 				33,
 				[
@@ -15416,7 +15425,29 @@ cr.getProjectModel = function() { return [
 				4140820261429906,
 				false
 			]
-,			[
+			]
+		]
+,		[
+			0,
+			null,
+			false,
+			null,
+			8826919258141514,
+			[
+			[
+				0,
+				cr.plugins_.PhonegapContact.prototype.cnds.GotAllContacts,
+				null,
+				0,
+				false,
+				false,
+				false,
+				3723535395728012,
+				false
+			]
+			],
+			[
+			[
 				10,
 				cr.plugins_.Text.prototype.acts.SetText,
 				null,
