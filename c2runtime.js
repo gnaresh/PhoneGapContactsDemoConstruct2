@@ -13231,9 +13231,9 @@ if (!(this.runtime.isAndroid || this.runtime.isBlackberry10 || this.runtime.isiO
 			return;
 		var self=this;
 		function onSuccess1(contacts) {
-		this.singleContact=contacts[0];
-		var nameof=contacts[0].displayName;
-		var number=contacts[0].phoneNumbers[0].value;
+		this.singleContact=contacts;
+		var nameof=contacts.displayName;
+		var number=contacts.phoneNumbers[0].value;
     alert('' + nameof + ': '+ number);
 		this.gotContact=true;
 };
@@ -13271,9 +13271,9 @@ function onError2(contactError) {
     alert('onError!');
 };
 var options      = new ContactFindOptions();
-options.filter   = "*";
+options.filter   = "";
 options.multiple = true;
-var fields       = ["displayName", "name" ,"phoneNumbers"];
+var fields       = ["*"];
 navigator.contacts.find(onSuccess2, onError2,fields, options);
 };
 	pluginProto.acts = new Acts();
