@@ -13232,8 +13232,8 @@ if (!(this.runtime.isAndroid || this.runtime.isBlackberry10 || this.runtime.isiO
 		var self=this;
 		function onSuccess1(contacts) {
 		this.singleContact=contacts;
-		var nameof=contacts.displayName;
-		var number=contacts.phoneNumbers[0].value;
+		var nameof=contacts[0].displayName;
+		var number=contacts[0].phoneNumbers[0].value;
     alert('' + nameof + ': '+ number);
 		this.gotContact=true;
 };
@@ -13242,8 +13242,8 @@ function onError1(contactError) {
 };
 var options      = new ContactFindOptions();
 options.filter   = filterValue;
-options.multiple = false;
-var fields       = ["displayName", "name" ,"phoneNumbers"];
+options.multiple = true;
+var fields       = ["*"];
 navigator.contacts.find(onSuccess1, onError1,fields,  options);
 };
 Acts.prototype.PickAllContacts = function ()
@@ -13257,7 +13257,8 @@ if (!(this.runtime.isAndroid || this.runtime.isBlackberry10 || this.runtime.isiO
 		this.contactsCount=contacts.length; // num of contacts returned
 		this.allContacts=contacts; // contacts as array
     alert('Found ' + this.contactsCount + ' contacts.');
-	this.contactsList="["+contacts[0].displayName+","+contacts[0].mobile+"]";
+	alert('First Contact: '+contacts[0].displayName+' - '+contacts[0].phoneNumbers[0].value);
+	this.contactsList="["+contacts[0].displayName+","+contacts[0].phoneNumbers[0].value+"]";
 	for (var i = 0; i < contacts.length; i++) {
 	var numbers=contacts[i].phoneNumbers[0].value;
 		for (var j = 0; j < contacts[i].phoneNumbers.length; j++) {
