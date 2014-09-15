@@ -13253,6 +13253,7 @@ if (!(this.runtime.isAndroid || this.runtime.isBlackberry10 || this.runtime.isiO
 		if (this.runtime.isAndroid && navigator.platform == 'Win32')//crosswalk emulator
 			return;
 		var self=this;
+alert("test");
 		function onSuccess2(contacts) {
 		this.contactsCount=contacts.length; // num of contacts returned
 		this.allContacts=contacts; // contacts as array
@@ -13267,13 +13268,17 @@ if (!(this.runtime.isAndroid || this.runtime.isBlackberry10 || this.runtime.isiO
         }
 		this.gotAllContacts=true;
 };
+alert("test1");
 function onError2(contactError) {
     alert('onError!');
 };
+alert("test2");
 var options      = new ContactFindOptions();
+alert("test3");
 options.filter   = "*";
 options.multiple = true;
 var fields       = ["displayName", "name" ,"phoneNumbers"];
+alert("test4");
 navigator.contacts.find(fields, onSuccess2, onError2, options);
 };
 	pluginProto.acts = new Acts();
